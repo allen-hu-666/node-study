@@ -15,9 +15,9 @@ app.server = http.createServer(app);
 app.use(morgan('dev'));
 
 // 3rd party middleware
-app.use(cors({
+/* app.use(cors({
 	exposedHeaders: config.corsHeaders
-}));
+})); */
 
 app.use(bodyParser.json({
 	limit : config.bodyLimit
@@ -28,12 +28,15 @@ initializeDb( db => {
 
 	// internal middleware
 	app.use(middleware({ config, db }));
-
+	app.use(express.static('htmls'));
+	app.get
 	// api router
 	app.use('/api', api({ config, db }));
-
+	app.get('/', function (req, res) {
+		res.redirect('/nav');
+	});
 	app.server.listen(process.env.PORT || config.port, () => {
-		console.log(`Started on port ${app.server.address().port}`);
+		console.log(`Started on   port ${app.server.address().port}`);
 	});
 });
 

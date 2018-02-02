@@ -1,5 +1,6 @@
 import resource from 'resource-router-middleware';
 //import facets from '../models/facets';
+import axios from 'axios';
 
 let facets = [13213,32432,25];
 
@@ -19,7 +20,18 @@ export default ({ config, db }) => resource({
 
 	/** GET / - List all entities */
 	index({ params, query }, res) {
-		res.json(facets);
+		axios.get('https://api.github.com/search/repositories?q=node')
+		.then(function (response) {
+			res.json({
+				code: 1,
+				data: response.data
+			});
+		}).catch(function (error) {
+			res.json({
+				code: -1,
+				msg: "未获取到信息！"
+			});
+		});
 	},
 
 	/** POST / - Create a new entity */
