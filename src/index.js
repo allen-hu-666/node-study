@@ -20,21 +20,29 @@ app.use(morgan('dev'));
 })); */
 
 app.use(bodyParser.json({
-	limit : config.bodyLimit
+	limit: config.bodyLimit
 }));
 
 // connect to db
-initializeDb( db => {
+initializeDb(db => {
 
 	// internal middleware
 	app.use(middleware({ config, db }));
-	app.use(express.static('htmls'));
-	app.get
+	app.use('/static', express.static('static'));
+
 	// api router
 	app.use('/api', api({ config, db }));
+
+	// index
 	app.get('/', function (req, res) {
-		res.redirect('/nav');
+		res.redirect('/static/nav');
 	});
+
+	// 404
+	app.get('*', function (req, res) {
+		res.send("404 not found!")
+	});
+
 	app.server.listen(process.env.PORT || config.port, () => {
 		console.log(`Started on   port ${app.server.address().port}`);
 	});
