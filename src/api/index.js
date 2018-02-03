@@ -1,9 +1,9 @@
-import { version } from '../../package.json';
-import { Router } from 'express';
-import facets from './facets';
-import first from './first';
+const { version } = require('../../package.json');
+const { Router } = require('express');
+const facets = require('./facets');
+const first = require('./first');
 
-export default ({ config, db }) => {
+module.exports = ({ config, db }) => {
 	let api = Router();
 
 	// mount the facets resource

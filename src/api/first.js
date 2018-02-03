@@ -1,10 +1,9 @@
-import resource from 'resource-router-middleware';
-//import facets from '../models/facets';
-import axios from 'axios';
+const resource = require('resource-router-middleware');
+const axios = require('axios');
 
 let facets = [13213,32432,25];
 
-export default ({ config, db }) => resource({
+module.exports = ({ config, db }) => resource({
 
 	/** Property name to store preloaded entity on `request`. */
 	id : 'first',

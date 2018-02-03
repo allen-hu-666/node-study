@@ -1,19 +1,19 @@
-import http from 'http';
-import express from 'express';
-import cors from 'cors';
-import morgan from 'morgan';
-import bodyParser from 'body-parser';
-import initializeDb from './db';
-import middleware from './middleware';
-import api from './api';
-import config from './config.json';
+const http = require('http');
+const express = require('express');
+const cors = require('cors');
+const morgan = require('morgan');
+const bodyParser = require('body-parser');
+const initializeDb = require('./db');
+const middleware = require('./middleware');
+const api = require('./api');
+const config = require('./config.json');
 
 let app = express();
 app.server = http.createServer(app);
 
 // logger
 app.use(morgan('dev'));
-
+//console.log(app);
 // 3rd party middleware
 /* app.use(cors({
 	exposedHeaders: config.corsHeaders
@@ -48,4 +48,4 @@ initializeDb(db => {
 	});
 });
 
-export default app;
+module.exports = app;
